@@ -1,0 +1,33 @@
+buildscript {
+    ext.kotlin_version = '1.9.0' // Ensure this is compatible with your AGP version
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+         // Update to the latest stable version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:8.7.1'
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Optional: You can customize the build directory if needed
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+// Register a clean task to delete the build directory
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
